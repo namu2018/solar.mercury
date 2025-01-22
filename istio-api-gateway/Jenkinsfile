@@ -4,7 +4,7 @@ def appName = "istio-api-gateway"
 def registry  = "harbor.example.com/my-project"
 def githubCredential = "github"
 def registryCredential = "harbor-credential" 
-def githubURL = "${MY_MERCURY_REPO_URL}"
+
 
 podTemplate(label: label, containers: [
     containerTemplate(name: 'git', image: 'alpine/git', command: 'cat', ttyEnabled: true),
