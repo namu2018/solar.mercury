@@ -33,10 +33,7 @@ volumes: [
                 }
             }
         }
-         stage('Push docker image') {
-            container('docker') {
-                withDockerRegistry([ credentialsId: "$registryCredential", url: "http://$registry" ]) {
-                    docker.image("$registry/$appName:$buildNum").push()
+         
                 }
             }
         }
