@@ -1,9 +1,9 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 def buildNum = "${BUILD_NUMBER}"
 def appName = "istio-api-gateway"
-def registry  = "${MY_NCR_URL}"
-def githubCredential = "github-credential"
-def registryCredential = "ncr-credential" 
+def registry  = "harbor.example.com/my-project"
+def githubCredential = "github"
+def registryCredential = "harbor-credential" 
 def githubURL = "${MY_MERCURY_REPO_URL}"
 
 podTemplate(label: label, containers: [
@@ -33,7 +33,10 @@ volumes: [
                 }
             }
         }
-         
+         stage('Push docker image') {
+            container('docker') {
+                withDockerRegistry([ credentialsId: "$registryCredential", url: "http://$registry" ]) {
+                    docker.image("$registry/$appName:$buildNum").push()
                 }
             }
         }
