@@ -6,7 +6,7 @@ def githubCredential = "github"
 def registryCredential = "harbor-credential" 
 
 
-podTemplate(label: label, containers: [
+podTemplate(label: label, serviceAccount: 'jenkins-sa', containers: [
     containerTemplate(name: 'git', image: 'alpine/git', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
 ],
